@@ -1,0 +1,22 @@
+#Description: This python script will allow you to fetch text information from a pdf file
+
+#import libraries
+
+import PyPDF2
+import os
+import docx
+
+mydoc = docx.Document() # document type
+pdfFileObj = open('pdf/filename.pdf', 'rb') # pdffile loction
+pdfReader = PyPDF2.PdfFileReader(pdfFileObj) # define pdf reader object
+
+# Loop through all the pages
+
+for pageNum in range(1, pdfReader.numPages):
+        pageObj = pdfReader.getPage(pageNum)
+        pdfContent = pageObj.extractText()  #extracts the content from the page. 
+        print(pdfContent) # print statement to test output in the terminal. codeline optional.
+        mydoc.add_paragraph(pdfContent) # this adds the content to the word document
+        
+mydoc.save("pdf/filename.docx") # Give a name to your output file. 
+
